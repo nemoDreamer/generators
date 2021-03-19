@@ -28,7 +28,7 @@
     "lint": "npm run lint:js:all",
     "lint:js:all": "npm run lint .",
     "docs": "md-magic --path '**/*.md' --ignore 'node_modules' --config .mdmagicrc.js",
-    "test": "node ./src/names/__tests__/createName.spec.js"
+    "test": "babel-node ./src/names/__tests__/createName.spec.js"
   },
   "husky": {
     "hooks": {
@@ -48,7 +48,13 @@
       "path": "./node_modules/cz-conventional-changelog"
     }
   },
+  "dependencies": {
+    "@babel/node": "^7.13.10"
+  },
   "devDependencies": {
+    "@babel/cli": "^7.13.10",
+    "@babel/core": "^7.13.10",
+    "@babel/preset-env": "^7.13.10",
     "cspell": "^5.3.8",
     "cz-conventional-changelog": "^3.3.0",
     "eslint": "^7.22.0",

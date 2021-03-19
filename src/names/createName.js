@@ -243,7 +243,7 @@ const createCleanSyllable = (language) => {
  * "Languages" are approximations based on basic combination "rules" of selected
  * vowels/consonants.
  *
- * @module
+ * @memberof module:generators.module:names
  *
  * @param {Object} config
  * @param {Number} [config.min=1] - Minimum number of syllables.
@@ -297,12 +297,12 @@ const createName = ({
 };
 
 // attach constants
+
 /**
  * @type {LANGUAGES}
- * @memberof module:createName
  */
 createName.LANGUAGES = LANGUAGES;
 
 // --------------------------------------------------
 
-module.exports = createName;
+export default createName;

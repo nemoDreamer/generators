@@ -2,7 +2,8 @@ const names = require("./names");
 const helpers = require("./helpers");
 
 /**
- * @module @nemodreamer/generators
+ * @module generators
+ * @alias @nemodreamer/generators
  */
 module.exports = {
   names,

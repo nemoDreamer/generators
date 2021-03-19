@@ -1,7 +1,7 @@
 #!/usr/bin/env nodemon
 
-const log = require("npmlog");
-const createName = require("../createName");
+import log from "npmlog";
+import createName from "../createName";
 
 log.heading = "names";
 
