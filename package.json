@@ -19,7 +19,7 @@
   "main": "src/index.js",
   "scripts": {
     "commit": "git-cz",
-    "dev": "./src/__tests__/createName.spec.js",
+    "dev": "./src/names/__tests__/createName.spec.js",
     "lint:spelling": "cspell lint",
     "lint:spelling:all": "npm run lint:spelling '*.*'",
     "lint:js": "eslint --cache --fix",
@@ -28,7 +28,7 @@
     "lint": "npm run lint:js:all",
     "lint:js:all": "npm run lint .",
     "docs": "md-magic --path '**/*.md' --ignore 'node_modules' --config .mdmagicrc.js",
-    "test": "node ./src/__tests__/createName.spec.js"
+    "test": "node ./src/names/__tests__/createName.spec.js"
   },
   "husky": {
     "hooks": {
