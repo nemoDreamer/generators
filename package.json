@@ -1,0 +1,69 @@
+{
+  "name": "@nemodreamer/generators",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Procedural generators, for games and fake data.",
+  "keywords": [
+    "procedural",
+    "generator",
+    "games",
+    "fake",
+    "data"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nemoDreamer/generators"
+  },
+  "license": "ISC",
+  "author": "Philip Blyth",
+  "main": "src/index.js",
+  "scripts": {
+    "commit": "git-cz",
+    "dev": "./src/__tests__/createName.spec.js",
+    "lint:spelling": "cspell lint",
+    "lint:spelling:all": "npm run lint:spelling '*.*'",
+    "lint:js": "eslint --cache --fix",
+    "lint:other": "prettier --write",
+    "lint:other:all": "npm run lint:other '**/*.{json,md}'",
+    "lint": "npm run lint:js:all",
+    "lint:js:all": "npm run lint .",
+    "docs": "md-magic --path '**/*.md' --ignore 'node_modules' --config .mdmagicrc.js",
+    "test": "node ./src/__tests__/createName.spec.js"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm test && lint-staged",
+      "prepare-commit-msg": "exec < /dev/tty && git cz --hook || true"
+    }
+  },
+  "lint-staged": {
+    "*": "npm run --silent lint:spelling",
+    "*.js": "npm run --silent lint:js",
+    "*.{json,md}": "npm run --silent lint:other",
+    "*.md": "npm run --silent docs",
+    "package.json": "sort-package-json"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  },
+  "devDependencies": {
+    "cspell": "^5.3.8",
+    "cz-conventional-changelog": "^3.3.0",
+    "eslint": "^7.22.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-config-prettier": "^8.1.0",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-prettier": "^3.3.1",
+    "husky": "^4.3.8",
+    "lint-staged": "^10.5.4",
+    "markdown-magic": "^2.0.0",
+    "markdown-magic-jsdoc": "^1.0.1",
+    "nodemon": "^2.0.7",
+    "npmlog": "^4.1.2",
+    "prettier": "^2.2.1",
+    "sort-package-json": "^1.49.0",
+    "standard-version": "^9.1.1"
+  }
+}

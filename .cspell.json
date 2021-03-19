@@ -1,0 +1,4 @@
+{
+  "ignorePaths": [".vscode", "node_modules", "package-lock.json"],
+  "words": ["bibo", "nemodreamer", "blyth", "npmlog", "mdmagicrc", "commitlint"]
+}
