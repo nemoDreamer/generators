@@ -1,9 +1,9 @@
-const createName = require("./createName");
+import createName from "./createName";
 
 /**
  * @module names
  * @memberof module:generators
  */
-module.exports = {
+export default {
   createName,
 };

@@ -1,9 +1,11 @@
+#!/usr/bin/env nodemon
+
 import log from "npmlog";
 import generators from "../index";
 
 log.heading = "index";
 
-log.verbose("generators:", generators);
+log.info("generators:", generators);
 
 const name = generators.names.createName({ debug: true });
 const rnd = generators.helpers.random.getRange(2, 5);

@@ -11,13 +11,14 @@ log.heading = "names";
 const main = () => {
   log.verbose("--------------------------------------------------");
 
-  for (let x = 0; x < 50; x++) {
+  for (let x = 0; x < 100; x++) {
     const debug = createName({
       // language: createName.LANGUAGES.NORDIC,
       debug: true,
     });
 
-    log.info(debug.languagePadded, debug.name);
+    // log.info(debug.languagePadded, debug.name);
+    process.stdout.write(`${debug.language}\t${debug.name}\n`);
   }
 };
 

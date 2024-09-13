@@ -1,11 +1,11 @@
-const names = require("./names");
-const helpers = require("./helpers");
+import names from "./names";
+import helpers from "./helpers";
 
 /**
  * @module generators
  * @alias @nemodreamer/generators
  */
-module.exports = {
+export default {
   names,
   helpers,
 };
