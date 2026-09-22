@@ -1,3 +1,4 @@
 {
-    "print.colourScheme": "Grayscale"
+    "print.colourScheme": "Grayscale",
+    "files.exclude": {}
 }

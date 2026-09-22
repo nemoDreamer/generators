@@ -6,7 +6,7 @@
 //   be a per-language extension of `BAD` list?)
 //
 // FIXME:
-// - [ ] `BAD` matching needs to happen _before_ accents get added...
+// - [x] `BAD` matching needs to happen _before_ accents get added...
 // - [ ] JSDoc sucks at enums...
 
 import { getRandom, getRange, doProbability } from "../helpers/random.js";
@@ -18,7 +18,7 @@ import { getRandom, getRange, doProbability } from "../helpers/random.js";
  * @readonly
  * @enum {string}
  */
-export const LANGUAGES = {
+const LANGUAGES = {
   /** No clear origin. */
   DEFAULT: "default",
   /** No weights. */
@@ -210,41 +210,43 @@ const getCharForLanguage = (collections, language) => {
  * @param {"c"|"v"} type - Determine vowel or consonant.
  * @param {LANGUAGES} [language]
  *
- * @returns {string} A random (language-specific, probably accented) vowel or
- * consonant.
+ * @returns {string} A random (language-specific) vowel or consonant, without
+ * accents, so `BAD` matching can run against the plain letter first.
  */
-const getVowelOrConsonant = (type, language) =>
-  getCharForLanguage(type === "v" ? VOWELS : CONSONANTS, language);
+const getVowelOrConsonant = (type, language) => {
+  const characters = getLanguage(type === "v" ? VOWELS : CONSONANTS, language);
+
+  return characters ? getRandom(characters) : "";
+};
 
 /**
  * @private
  *
  * @param {LANGUAGES} [language]
  *
- * @returns {string} A string (potentially bad) matching one of the
- * `SYLLABLE_PATTERNS`.
+ * @returns {string[]} Unaccented characters (potentially bad) matching one of
+ * the `SYLLABLE_PATTERNS`.
  */
 const createSyllable = (language) =>
   getRandom(getLanguage(SYLLABLE_PATTERNS, language))
     .split("")
-    .map((type) => getVowelOrConsonant(type, language))
-    .join("");
+    .map((type) => getVowelOrConsonant(type, language));
 
 /**
  * @private
  *
  * @param {LANGUAGES} [language]
  *
- * @returns {string} A clean syllable.
+ * @returns {string} A clean (probably accented) syllable.
  */
 const createCleanSyllable = (language) => {
   let syllable;
 
   do {
     syllable = createSyllable(language);
-  } while (isBad(syllable));
+  } while (isBad(syllable.join("")));
 
-  return syllable;
+  return syllable.map((c) => addAccent(c, language)).join("");
 };
 
 /**
