@@ -1,4 +1,4 @@
-import createName from "./createName";
+import createName from "./createName.js";
 
 /**
  * @module names

@@ -17,6 +17,7 @@
   "license": "ISC",
   "author": "Philip Blyth",
   "main": "src/index.js",
+  "type": "module",
   "scripts": {
     "commit": "git-cz",
     "dev": "./src/names/__tests__/createName.spec.js",
@@ -27,8 +28,8 @@
     "lint:other:all": "npm run lint:other '**/*.{json,md}'",
     "lint": "npm run lint:js:all",
     "lint:js:all": "npm run lint .",
-    "docs": "md-magic --path '**/*.md' --ignore 'node_modules' --config .mdmagicrc.js",
-    "test": "babel-node ./src/names/__tests__/createName.spec.js"
+    "docs": "md-magic --path '**/*.md' --ignore 'node_modules' --config .mdmagicrc.cjs",
+    "test": "node ./src/names/__tests__/createName.spec.js"
   },
   "husky": {
     "hooks": {

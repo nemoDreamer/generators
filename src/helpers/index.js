@@ -1,9 +1,9 @@
-const random = require("./random");
+import * as random from "./random.js";
 
 /**
  * @module helpers
  * @memberof module:generators
  */
-module.exports = {
+export default {
   random,
 };

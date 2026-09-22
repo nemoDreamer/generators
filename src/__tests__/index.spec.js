@@ -1,7 +1,7 @@
 #!/usr/bin/env nodemon
 
 import log from "npmlog";
-import generators from "../index";
+import generators from "../index.js";
 
 log.heading = "index";
 

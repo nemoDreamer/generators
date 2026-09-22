@@ -1,7 +1,7 @@
 #!/usr/bin/env nodemon
 
 import log from "npmlog";
-import createName from "../createName";
+import createName from "../createName.js";
 
 log.heading = "names";
 

@@ -1,34 +1,40 @@
 // TODO:
-// - compute "language" config inside `createName`, then pass _that_ around
+// - [ ] compute "language" config inside `createName`, then pass _that_ around
 //   instead, to avoid constant `getLanguage`/`getCharForLanguage`?
-// - add "common syllable endings" per language for added realism!
-// - add "avoid implausible letter combinations" per language (could simply be a
-//   per-language extension of `BAD` list?)
+// - [ ] add "common syllable endings" per language for added realism!
+// - [ ] add "avoid implausible letter combinations" per language (could simply
+//   be a per-language extension of `BAD` list?)
 //
 // FIXME:
-// - `BAD` matching needs to happen _before_ accents get added...
-// - JSDoc sucks at enums...
+// - [ ] `BAD` matching needs to happen _before_ accents get added...
+// - [ ] JSDoc sucks at enums...
 
-const { getRandom, getRange, doProbability } = require("../helpers/random");
+import { getRandom, getRange, doProbability } from "../helpers/random.js";
 
 // c:spell:disable
 /**
  * Language of generated name
  *
  * @readonly
- * @enum {String}
+ * @enum {string}
  */
-const LANGUAGES = {
-  DEFAULT: "default", // <- no clear origin
-  RANDOM: "random", // <- no weights
-  NORDIC: "nordic", // <- hit-and-miss, since you still might get endings that sound latin...
-  LATIN: "latin", // <- ... at least until we can add some post-processing
+export const LANGUAGES = {
+  /** No clear origin. */
+  DEFAULT: "default",
+  /** No weights. */
+  RANDOM: "random",
+  /** Hit-and-miss, since you still might get endings that sound latin... */
+  NORDIC: "nordic",
+  /** ... at least until we can add some post-processing. */
+  LATIN: "latin",
   GOBLIN: "goblin",
   MOLE: "mole",
   SPIDER: "spider",
   BIBO: "bibo",
 };
+
 const EXCLUDE = [LANGUAGES.RANDOM]; // <- TODO: allow to define per `createName` call?
+
 const SYLLABLE_PATTERNS = {
   default: ["ccv", "cvc", "cvc", "cvc", "vcc", "vcv", "vcv", "vcv"],
   random: ["ccv", "cvc", "vcc", "vcv", "vvv"],
@@ -36,6 +42,7 @@ const SYLLABLE_PATTERNS = {
   latin: ["cvc", "cvc", "cvc", "cvv", "vcc", "vcc", "vcv", "vcv", "vcv"],
   bibo: ["cvc", "vcv"],
 };
+
 const CONSONANTS = {
   default: "bbccdddfffggghhjkkklllmmnnppqrrrsssttvvwwxz",
   random: "bcdfghjklmnpqrstvwxz",
@@ -46,6 +53,7 @@ const CONSONANTS = {
   spider: "chkrs",
   bibo: "b",
 };
+
 const VOWELS = {
   default: "aaaeeeiioouuy",
   random: "aeiouy",
@@ -56,6 +64,7 @@ const VOWELS = {
   spider: "i",
   bibo: "io",
 };
+
 const SEPARATORS = {
   default: "-'oae",
   latin: "aeiou",
@@ -64,6 +73,7 @@ const SEPARATORS = {
   spider: "-'",
   bibo: "io",
 };
+
 const ACCENTS = {
   default: {
     a: "àáâäæãåā",
@@ -136,16 +146,16 @@ const INCLUDE = Object.values(LANGUAGES).filter(
 /**
  * @private
  *
- * @param {String} str
+ * @param {string} str
  *
- * @returns {Boolean} Whether the string matches a `BAD` pattern.
+ * @returns {boolean} Whether the string matches a `BAD` pattern.
  */
 const isBad = (str) => BAD.some((bad) => bad.test(str));
 
 /**
  * @private
  *
- * @param {Object<Language,any>} collections - A hash of Language-keyed values.
+ * @param {Object<string,any>} collections - A hash of Language-keyed values.
  * @param {LANGUAGES} [language]
  *
  * @returns {any} The value for the given `language`, or the default.
@@ -164,10 +174,10 @@ const getLanguage = (collections, language) => {
 /**
  * @private
  *
- * @param {String} c - Single character.
+ * @param {string} c - Single character.
  * @param {LANGUAGES} language
  *
- * @returns {String} Character with probable accent.
+ * @returns {string} Character with probable accent.
  */
 const addAccent = (c, language) => {
   const accents = getLanguage(ACCENTS, language);
@@ -182,10 +192,10 @@ const addAccent = (c, language) => {
 /**
  * @private
  *
- * @param {Object<Language,any>} collections - A hash of Language keyed values.
+ * @param {Object<string,any>} collections - A hash of Language keyed values.
  * @param {LANGUAGES} [language]
  *
- * @returns {String} A random (probably accented) character from the language or
+ * @returns {string} A random (probably accented) character from the language or
  * default collection.
  */
 const getCharForLanguage = (collections, language) => {
@@ -200,7 +210,7 @@ const getCharForLanguage = (collections, language) => {
  * @param {"c"|"v"} type - Determine vowel or consonant.
  * @param {LANGUAGES} [language]
  *
- * @returns {String} A random (language-specific, probably accented) vowel or
+ * @returns {string} A random (language-specific, probably accented) vowel or
  * consonant.
  */
 const getVowelOrConsonant = (type, language) =>
@@ -211,7 +221,7 @@ const getVowelOrConsonant = (type, language) =>
  *
  * @param {LANGUAGES} [language]
  *
- * @returns {String} A string (potentially bad) matching one of the
+ * @returns {string} A string (potentially bad) matching one of the
  * `SYLLABLE_PATTERNS`.
  */
 const createSyllable = (language) =>
@@ -225,7 +235,7 @@ const createSyllable = (language) =>
  *
  * @param {LANGUAGES} [language]
  *
- * @returns {String} A clean syllable.
+ * @returns {string} A clean syllable.
  */
 const createCleanSyllable = (language) => {
   let syllable;
@@ -246,13 +256,15 @@ const createCleanSyllable = (language) => {
  * @memberof module:generators.module:names
  *
  * @param {Object} config
- * @param {Number} [config.min=1] - Minimum number of syllables.
- * @param {Number} [config.max=3] - Maximum number of syllables.
+ * @param {number} [config.min=1] - Minimum number of syllables.
+ * @param {number} [config.max=3] - Maximum number of syllables.
  * @param {LANGUAGES} [config.language] - The language of the name. If not
  * specified, a language will be picked at random.
- * @param {Boolean} [config.debug] - Return additional information.
+ * @param {boolean} [config.debug] - Return additional information.
  *
- * @returns {String} A clean, fully (potentially separated/accented) name.
+ * @returns {string|{language: LANGUAGES, languagePadded: string, name: string}}
+ * A clean, fully (potentially separated/accented) name, or (if `config.debug`)
+ * an object with additional information.
  */
 const createName = ({
   min = 1,
@@ -298,9 +310,6 @@ const createName = ({
 
 // attach constants
 
-/**
- * @type {LANGUAGES}
- */
 createName.LANGUAGES = LANGUAGES;
 
 // --------------------------------------------------

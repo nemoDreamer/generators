@@ -1,5 +1,5 @@
-import names from "./names";
-import helpers from "./helpers";
+import names from "./names/index.js";
+import helpers from "./helpers/index.js";
 
 /**
  * @module generators
