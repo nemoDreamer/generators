@@ -24,10 +24,10 @@ const LANGUAGES = {
   DEFAULT: "default",
   /** No weights. */
   RANDOM: "random",
-  /** Hit-and-miss, since you still might get endings that sound latin... */
+  /** Hit-and-miss nordic sounding... */
   NORDIC: "nordic",
-  /** ... at least until we can add some post-processing. */
-  LATIN: "latin",
+  /** Vaguely romance-language sounding... */
+  ROMANCE: "romance",
   GOBLIN: "goblin",
   MOLE: "mole",
   SPIDER: "spider",
@@ -40,15 +40,15 @@ const SYLLABLE_PATTERNS = {
   default: ["ccv", "cvc", "cvc", "cvc", "vcc", "vcv", "vcv", "vcv"],
   random: ["ccv", "cvc", "vcc", "vcv", "vvv"],
   nordic: ["ccv", "ccvv", "cvc", "cvvc", "vcc", "vccv", "vcv", "vvcc"],
-  latin: ["cvc", "cvc", "cvc", "cvv", "vcc", "vcc", "vcv", "vcv", "vcv"],
+  romance: ["cvc", "cvc", "cvc", "cvv", "cvv", "vcc", "vcv", "vcv", "vcv"],
   bibo: ["cvc", "vcv"],
 };
 
 const CONSONANTS = {
   default: "bbccdddfffggghhjkkklllmmnnppqrrrsssttvvwwxz",
   random: "bcdfghjklmnpqrstvwxz",
-  nordic: "dddfffggghhjkkkklllllmnprrrrsssstttttvvvwwwz",
-  latin: "bccccdddghlllmmmnnnpqrrrssstttvwy",
+  nordic: "tttttsssssrrrrrnnnnllllkkkkgggdddmmmvvhhffbbpjwz",
+  romance: "nnnnnrrrrrsssssttttllllccccdddmmmffvvbbppggqhwy",
   goblin: "cfkqrstvz",
   mole: "bdgmnw",
   spider: "chkrs",
@@ -58,8 +58,8 @@ const CONSONANTS = {
 const VOWELS = {
   default: "aaaeeeiioouuy",
   random: "aeiouy",
-  nordic: "aaaaaaeeeeeeiiiioouu",
-  latin: "aeiou",
+  nordic: "aaaeeeiiouy",
+  romance: "aaaaeeeiiooou",
   goblin: "ai",
   mole: "ou",
   spider: "i",
@@ -67,12 +67,10 @@ const VOWELS = {
 };
 
 const SEPARATORS = {
-  default: "-'oae",
-  latin: "aeiou",
-  goblin: "-~'hr",
-  mole: "-—~o",
+  default: "", // <- no separators by default
+  goblin: "-~'",
+  mole: "-—~",
   spider: "-'",
-  bibo: "io",
 };
 
 const ACCENTS = {
@@ -93,17 +91,17 @@ const ACCENTS = {
     a: "äæåā",
     e: "ëēė",
     i: "ïī",
-    o: "öœøō",
+    o: "öøō",
     s: "ß",
     u: "üū",
   },
-  latin: {
-    a: "àáâæ",
+  romance: {
+    a: "àáâã",
     c: "ç",
     e: "èéê",
     i: "îíì",
     n: "ñ",
-    o: "ôòóœ",
+    o: "ôòóõ",
     u: "ûù",
   },
   goblin: {
@@ -116,13 +114,15 @@ const ACCENTS = {
   },
   bibo: {},
 };
+// universal, language-agnostic "avoid these" - awkward/real-word-ish sounds:
 const BAD = [
   /[fv][aeu][cgkq]/,
   /di[kcq]/,
-  /[sz]au[kc]/,
+  /[sz][au][kc]/,
   /[sz]ex/,
   /bu[tm]/,
   /[ck]um/,
+  /(.)\1\1/, // <- no tripple letters
 ];
 
 /**
