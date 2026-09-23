@@ -28,7 +28,7 @@
     "lint:other:all": "npm run lint:other '**/*.{json,md}'",
     "lint": "npm run lint:js:all",
     "lint:js:all": "npm run lint .",
-    "docs": "md-magic --path '**/*.md' --ignore 'node_modules' --config .mdmagicrc.cjs",
+    "docs": "./scripts/generate-docs.js",
     "test": "node ./src/names/__tests__/createName.spec.js"
   },
   "husky": {
@@ -69,7 +69,8 @@
     "markdown-magic-jsdoc": "^1.0.1",
     "nodemon": "^2.0.7",
     "npmlog": "^4.1.2",
-    "prettier": "^2.2.1",
+    "prettier": "^3.9.9",
+    "prettier-plugin-compact-markdown-table": "^0.1.0",
     "sort-package-json": "^1.49.0",
     "standard-version": "^9.1.1"
   }

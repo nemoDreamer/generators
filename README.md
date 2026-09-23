@@ -6,13 +6,19 @@ Procedural generators, for games and fake data.
 
 <!-- cspell:disable -->
 <!-- AUTO-GENERATED-CONTENT:START (TOC) -->
+
 - [API](#api)
-  * [Modules](#modules)
-  * [helpers](#helpers)
-  * [random](#random)
-  * [generators](#generators)
-  * [names](#names)
-  * [LANGUAGES : enum](#languages--enum)
+  - [Modules](#modules)
+  - [helpers](#helpers)
+  - [random](#random)
+    - [random.getRandom ⇒ any](#randomgetrandom--any)
+    - [random.getRange ⇒ number](#randomgetrange--number)
+    - [random.doProbability ⇒ boolean](#randomdoprobability--boolean)
+  - [generators](#generators)
+  - [names](#names)
+    - [names.createName(config) ⇒ string | Object](#namescreatenameconfig--string--object)
+  - [LANGUAGES : enum](#languages--enum)
+
 <!-- AUTO-GENERATED-CONTENT:END -->
 
 <!-- cspell:enable -->
@@ -21,6 +27,7 @@ Procedural generators, for games and fake data.
 
 <!-- cspell:disable -->
 <!-- AUTO-GENERATED-CONTENT:START (JSDOC:files=src/**/*.js&heading-depth=3&separators=true&global-index-format=dl&module-index-format=dl&property-list-format=list&member-index-format=list) -->
+
 ### Modules
 
 <dl>
@@ -38,126 +45,116 @@ Procedural generators, for games and fake data.
 
 ### helpers
 
-* * *
+---
 
 <a name="module_helpers.module_random"></a>
 
 ### random
 
-* [random](#module_helpers.module_random)
-    * [.getRandom](#module_helpers.module_random.getRandom) ⇒ <code>any</code>
-    * [.getRange](#module_helpers.module_random.getRange) ⇒ <code>Number</code>
-    * [.doProbability](#module_helpers.module_random.doProbability) ⇒ <code>Boolean</code>
+- [random](#module_helpers.module_random)
+  - [.getRandom](#module_helpers.module_random.getRandom) ⇒ <code>any</code>
+  - [.getRange](#module_helpers.module_random.getRange) ⇒ <code>number</code>
+  - [.doProbability](#module_helpers.module_random.doProbability) ⇒ <code>boolean</code>
 
-
-* * *
+---
 
 <a name="module_helpers.module_random.getRandom"></a>
 
-############# random.getRandom ⇒ <code>any</code>
-**Kind**: static constant of [<code>random</code>](#module_helpers.module_random)  
-**Returns**: <code>any</code> - Random element from input array.  
+#### random.getRandom ⇒ <code>any</code>
 
-| Param | Type | Description |
-| --- | --- | --- |
-| arr | <code>[ &#x27;Array&#x27; ].&lt;any&gt;</code> | Input array. |
+**Kind**: static constant of [<code>random</code>](#module_helpers.module_random)
 
+**Returns**: <code>any</code> - Random element from input array.
 
-* * *
+|Param|Type|Description|
+|-|-|-|
+|arr|<code>[ &#x27;Array&#x27; ].&lt;any&gt;</code>|Input array.|
+
+---
 
 <a name="module_helpers.module_random.getRange"></a>
 
-############# random.getRange ⇒ <code>Number</code>
-**Kind**: static constant of [<code>random</code>](#module_helpers.module_random)  
-**Returns**: <code>Number</code> - A random number between `min` and `max` (including).  
+#### random.getRange ⇒ <code>number</code>
 
-| Param | Type |
-| --- | --- |
-| min | <code>Number</code> | 
-| max | <code>Number</code> | 
+**Kind**: static constant of [<code>random</code>](#module_helpers.module_random)
 
+**Returns**: <code>number</code> - A random number between `min` and `max` (including).
 
-* * *
+|Param|Type|
+|-|-|
+|min|<code>number</code>|
+|max|<code>number</code>|
+
+---
 
 <a name="module_helpers.module_random.doProbability"></a>
 
-############# random.doProbability ⇒ <code>Boolean</code>
-**Kind**: static constant of [<code>random</code>](#module_helpers.module_random)  
+#### random.doProbability ⇒ <code>boolean</code>
 
-| Param | Type | Description |
-| --- | --- | --- |
-| p | <code>Number</code> | Probability as float between 0-1. |
+**Kind**: static constant of [<code>random</code>](#module_helpers.module_random)
 
+|Param|Type|Description|
+|-|-|-|
+|p|<code>number</code>|Probability as float between 0-1.|
 
-* * *
+---
 
 <a name="module_generators"></a>
 
 ### generators
 
-* * *
+---
 
 <a name="module_generators.module_names"></a>
 
 ### names
 
-* [names](#module_generators.module_names)
-    * [.createName(config)](#module_generators.module_names.createName) ⇒ <code>String</code>
-        * [.LANGUAGES](#module_generators.module_names.createName.LANGUAGES) : [<code>LANGUAGES</code>](#LANGUAGES)
-
-
-* * *
+---
 
 <a name="module_generators.module_names.createName"></a>
 
-############# names.createName(config) ⇒ <code>String</code>
+#### names.createName(config) ⇒ <code>string</code> \| <code>Object</code>
+
 Creates a name in a given language.
 
 "Languages" are approximations based on basic combination "rules" of selected
 vowels/consonants.
 
-**Kind**: static method of [<code>names</code>](#module_generators.module_names)  
-**Returns**: <code>String</code> - A clean, fully (potentially separated/accented) name.  
+**Kind**: static method of [<code>names</code>](#module_generators.module_names)
 
-| Param | Type | Default | Description |
-| --- | --- | --- | --- |
-| config | <code>Object</code> |  |  |
-| [config.min] | <code>Number</code> | <code>1</code> | Minimum number of syllables. |
-| [config.max] | <code>Number</code> | <code>3</code> | Maximum number of syllables. |
-| [config.language] | [<code>LANGUAGES</code>](#LANGUAGES) |  | The language of the name. If not specified, a language will be picked at random. |
-| [config.debug] | <code>Boolean</code> |  | Return additional information. |
+**Returns**: <code>string</code> \| <code>Object</code> - A clean, fully (potentially separated/accented) name, or (if `config.debug`)
+an object with additional information.
 
+|Param|Type|Default|Description|
+|-|-|-|-|
+|config|<code>Object</code>|||
+|[config.min]|<code>number</code>|<code>1</code>|Minimum number of syllables.|
+|[config.max]|<code>number</code>|<code>3</code>|Maximum number of syllables.|
+|[config.language]|[<code>LANGUAGES</code>](#LANGUAGES)||The language of the name. If not specified, a language will be picked at random.|
+|[config.debug]|<code>boolean</code>||Return additional information.|
 
-* * *
-
-<a name="module_generators.module_names.createName.LANGUAGES"></a>
-
-####################### createName.LANGUAGES : [<code>LANGUAGES</code>](#LANGUAGES)
-**Kind**: static property of [<code>createName</code>](#module_generators.module_names.createName)  
-
-* * *
+---
 
 <a name="LANGUAGES"></a>
 
 ### LANGUAGES : <code>enum</code>
+
 Language of generated name
 
 **Kind**: global enum  
 **Read only**: true  
 **Properties**
 
-- DEFAULT <code>String</code>  
-- RANDOM <code>String</code>  
-- NORDIC <code>String</code>  
-- LATIN <code>String</code>  
-- GOBLIN <code>String</code>  
-- MOLE <code>String</code>  
-- SPIDER <code>String</code>  
-- BIBO <code>String</code>  
+- DEFAULT <code>string</code> - No clear origin.
+- RANDOM <code>string</code> - No weights.
+- NORDIC <code>string</code> - Hit-and-miss, since you still might get endings that sound latin...
+- LATIN <code>string</code> - ... at least until we can add some post-processing.
+- GOBLIN <code>string</code>
+- MOLE <code>string</code>
+- SPIDER <code>string</code>
+- BIBO <code>string</code>
 
-
-* * *
-
+---
 
 <!-- AUTO-GENERATED-CONTENT:END -->
 <!-- cspell:enable -->
