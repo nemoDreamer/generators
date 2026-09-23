@@ -28,6 +28,8 @@ const LANGUAGES = {
   NORDIC: "nordic",
   /** Vaguely romance-language sounding... */
   ROMANCE: "romance",
+  /** Loosely celtic-sounding (Welsh/Irish/Gaelic inspired). */
+  CELTIC: "celtic",
   GOBLIN: "goblin",
   MOLE: "mole",
   SPIDER: "spider",
@@ -41,6 +43,7 @@ const SYLLABLE_PATTERNS = {
   random: ["ccv", "cvc", "vcc", "vcv", "vvv"],
   nordic: ["ccv", "ccvv", "cvc", "cvvc", "vcc", "vccv", "vcv", "vvcc"],
   romance: ["cvc", "cvc", "cvc", "cvv", "cvv", "vcc", "vcv", "vcv", "vcv"],
+  celtic: ["cvc", "cvc", "ccv", "ccvc", "cvv", "vcc", "vcv", "vcv"],
   bibo: ["cvc", "vcv"],
 };
 
@@ -49,6 +52,7 @@ const CONSONANTS = {
   random: "bcdfghjklmnpqrstvwxz",
   nordic: "tttttsssssrrrrrnnnnllllkkkkgggdddmmmvvhhffbbpjwz",
   romance: "nnnnnrrrrrsssssttttllllccccdddmmmffvvbbppggqhwy",
+  celtic: "rrrrrlllllddddnnnngggccctttbbffmmsshhp",
   goblin: "cfkqrstvz",
   mole: "bdgmnw",
   spider: "chkrs",
@@ -60,6 +64,7 @@ const VOWELS = {
   random: "aeiouy",
   nordic: "aaaeeeiiouy",
   romance: "aaaaeeeiiooou",
+  celtic: "aaaaeeeiiioouwwyy",
   goblin: "ai",
   mole: "ou",
   spider: "i",
@@ -103,6 +108,15 @@ const ACCENTS = {
     n: "ñ",
     o: "ôòóõ",
     u: "ûù",
+  },
+  celtic: {
+    a: "âá",
+    e: "êé",
+    i: "îí",
+    o: "ôó",
+    u: "ûú",
+    w: "ŵ", // <- distinctly Welsh
+    y: "ŷ", // <- distinctly Welsh
   },
   goblin: {
     a: "àá",
@@ -161,6 +175,15 @@ const LINGUISTIC_RULES = {
       /p[vw]/,
       /bw/,
       /mr/,
+    ],
+  },
+  celtic: {
+    // most frequent sounds, occasionally favored as a name's ending:
+    common: ["wen", "wyn", "eth", "lyn", "og"],
+    exclude: [
+      /lr|rl/, // <- mixed liquids don't cluster ("ll"/"rr" are fine on their own)
+      /bc|cb/, // <- clashing stops
+      /fs|sf/, // <- clashing fricatives
     ],
   },
   // goblin: {
