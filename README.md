@@ -68,7 +68,7 @@ Procedural generators, for games and fake data.
 
 |Param|Type|Description|
 |-|-|-|
-|arr|<code>[ &#x27;Array&#x27; ].&lt;any&gt;</code>|Input array.|
+|arr|<code>Array.&lt;any&gt;</code>|Input array.|
 
 ---
 
@@ -147,8 +147,8 @@ Language of generated name
 
 - DEFAULT <code>string</code> - No clear origin.
 - RANDOM <code>string</code> - No weights.
-- NORDIC <code>string</code> - Hit-and-miss, since you still might get endings that sound latin...
-- LATIN <code>string</code> - ... at least until we can add some post-processing.
+- NORDIC <code>string</code> - Hit-and-miss nordic sounding...
+- ROMANCE <code>string</code> - Vaguely romance-language sounding...
 - GOBLIN <code>string</code>
 - MOLE <code>string</code>
 - SPIDER <code>string</code>

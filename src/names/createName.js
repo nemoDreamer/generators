@@ -114,7 +114,13 @@ const ACCENTS = {
   },
   bibo: {},
 };
-// universal, language-agnostic "avoid these" - awkward/real-word-ish sounds:
+
+/**
+ * Universal, language-agnostic "avoid these" - awkward/real-word-ish sounds.
+ *
+ * @readonly
+ * @private
+ */
 const BAD = [
   /[fv][aeu][cgkq]/,
   /di[kcq]/,
@@ -129,6 +135,7 @@ const BAD = [
  * Per-language phonotactics, layered on top of the universal `BAD` list.
  *
  * @readonly
+ * @private
  */
 const LINGUISTIC_RULES = {
   nordic: {
